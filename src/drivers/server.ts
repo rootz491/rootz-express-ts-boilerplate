@@ -31,8 +31,8 @@ class Server {
 		try {
 			await this.mongo?.connect();
 			await this.redis?.connect();
-			await this.RoutesHandler?.loadRoutes();
 			await this.MiddlewareHandler?.loadMiddlewares();
+			await this.RoutesHandler?.loadRoutes();
 		} catch (error: any) {
 			console.log(error);
 			console.error(`Server Error: ${error?.message || error}`);

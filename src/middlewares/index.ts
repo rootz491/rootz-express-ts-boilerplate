@@ -7,6 +7,8 @@ import config from "../config";
 import helmet from "helmet";
 
 export class MiddlewareHandler {
+	private middlewares: MiddlewareOption[] = [];
+
 	constructor(private app: Express, private readonly context: RouteContext) {}
 
 	public async loadMiddlewares(): Promise<void> {
@@ -26,6 +28,8 @@ export class MiddlewareHandler {
 
 		this.app.use(cors(config.express.cors));
 		this.app.use(helmet());
+
+		this.applyMiddlewares();
 	}
 
 	private async processFolder(folderPath: string) {
@@ -36,7 +40,7 @@ export class MiddlewareHandler {
 		}
 	}
 
-	private async processFile(filePath: string): Promise<void> {
+	private async processFile(filePath: string) {
 		const isNotThisFile = __filename !== filePath;
 		const stats = fs.statSync(filePath);
 		if (stats.isDirectory()) {
@@ -48,18 +52,19 @@ export class MiddlewareHandler {
 			const currentOption = option.default as MiddlewareOption;
 
 			if (currentOption) {
-				const { function: func, path } = currentOption;
+				this.middlewares.push(currentOption);
+			}
+		}
+	}
+
+	private applyMiddlewares() {
+		this.middlewares
+			.sort((a, b) => a.priority - b.priority)
+			.forEach(({ function: func, path }) => {
 				this.app.use(path, (req, res, next) => {
 					func(req, res, next, this.context);
 				});
-				console.log(
-					`[INFO] Middleware loaded: ${filePath
-						.split("\\")
-						.pop()
-						?.split(".")
-						.shift()} [scope: ${path}]`
-				);
-			}
-		}
+				console.log(`[INFO] Middleware loaded [scope: ${path}]`);
+			});
 	}
 }

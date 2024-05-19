@@ -9,7 +9,7 @@ const job: JobOption<RedisPayload> = {
 	key: "hello",
 	function: async ({ mongo, payload, callback }) => {
 		// you can also perform mongo operations here
-		console.log("Hello Mom!", payload);
+		console.log(`[JOB] Received payload: Hello "${payload.value}"!`);
 	},
 };
 

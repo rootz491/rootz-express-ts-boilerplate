@@ -28,3 +28,6 @@ export class HelloModel extends MongoDB {
 		return this.collection.deleteOne(query);
 	}
 }
+
+const helloModel = new HelloModel();
+export default helloModel;

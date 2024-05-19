@@ -80,7 +80,11 @@ class Redis {
 		}
 	}
 
-	async publish(channel: string, key: string, payload: any): Promise<void> {
+	async publish(
+		channel: string,
+		key: string,
+		payload: any = null
+	): Promise<void> {
 		try {
 			const publisher = this.client.duplicate();
 			await publisher.connect();

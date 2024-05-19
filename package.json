@@ -2,7 +2,10 @@
 	"name": "rootz-express-ts-boilerplate",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"bin": {
+		"create-express-ts-app": "./bin/create-rootz-express.js"
+	},
 	"scripts": {
 		"start:server": "node dist/index.js",
 		"build": "./node_modules/typescript/bin/tsc",

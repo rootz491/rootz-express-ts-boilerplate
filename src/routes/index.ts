@@ -20,9 +20,9 @@ class RoutesHandler {
 			const stats = fs.statSync(filePath);
 
 			if (stats.isDirectory()) {
-				this.processFolder(filePath);
+				await this.processFolder(filePath);
 			} else {
-				this.processFile(filePath);
+				await this.processFile(filePath);
 			}
 		}
 
@@ -39,7 +39,7 @@ class RoutesHandler {
 		}
 	}
 
-	async processFile(filePath: string): Promise<void> {
+	async processFile(filePath: string) {
 		const isNotThisFile = __filename !== filePath;
 		const stats = fs.statSync(filePath);
 		if (stats.isDirectory()) {
