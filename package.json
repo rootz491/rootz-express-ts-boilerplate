@@ -1,10 +1,10 @@
 {
 	"name": "rootz-express-ts-boilerplate",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A boilerplate for creating express server with typescript",
 	"main": "dist/index.js",
 	"bin": {
-		"create-express-ts-app": "./bin/create-rootz-express.js",
+		"create-rootz-express": "./bin/create-rootz-express.js",
 		"generate-route": "./bin/generate-route.js"
 	},
 	"scripts": {
