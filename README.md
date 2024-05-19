@@ -23,7 +23,7 @@ This is a boilerplate for express-ts project.
 1. Fetch the project as boilerplate
 
 ```bash
-npx create-rootz-app my-app
+npx rootz-express-ts-boilerplate <project-name>
 ```
 
 2. Install dependencies
@@ -63,7 +63,9 @@ The server is connected to the worker through a message queue (Redis channel). T
 
 - The worker doesn't have access to the request object, so it can't send a response to the client. Make sure these tasks are asynchronous and don't require a response for end user.
 
-## Middleware
+## Components
+
+### Middleware
 
 - Middleware is a function that runs before the route handler. It can be used to perform tasks like logging, authentication, etc.
 
@@ -76,3 +78,13 @@ The server is connected to the worker through a message queue (Redis channel). T
 - `func`: Middleware function that runs before the route handler, it takes 4 arguments: `req`, `res`, `next`, `content`.
 
 - `context`: Middleware is also able to access the context object which contains the instance of services like `redis`, `mongo`, etc.
+
+### Routes
+
+- Routes are automatically registered by the server. Just create a file in the routes folder and follow the `RouteOption` interface to define your route.
+
+- To generate a route, you can use the `generate-route` command.
+
+```bash
+npx rootz-express-ts-boilerplate generate-route <route-name>
+```
