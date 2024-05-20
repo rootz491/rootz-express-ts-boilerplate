@@ -17,10 +17,10 @@ class ProcessWorker {
 		try {
 			if (!this.name) throw new Error("Job name not provided");
 			await this.redisClient.subscribe(this.name);
-			console.log(`[${this.name.toUpperCase()}] Creazilla Worker started!`);
+			console.log(`[${this.name.toUpperCase()}] Rootz Worker started!`);
 		} catch (error) {
 			console.error(
-				`[WORKER] Error starting Creazilla Worker ${this.name?.toUpperCase()}:`,
+				`[WORKER] Error starting Rootz Worker ${this.name?.toUpperCase()}:`,
 				error
 			);
 			this.stop();
@@ -31,7 +31,7 @@ class ProcessWorker {
 		await this.redisClient.unsubscribe();
 		await this.redisClient.disconnect();
 		this.handlers?.flushMapper();
-		console.log(`[${this.name}] Creazilla Worker stopped!`);
+		console.log(`[${this.name}] Rootz Worker stopped!`);
 	}
 }
 
